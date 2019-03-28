@@ -1,0 +1,30 @@
+server:
+  port: 9000
+
+vertx:
+  # 事件循环处理线程数
+  nio-thread-count: 6
+  # worker线程池大小
+  worker-thread-count: 10
+  # HTTP Server Verticle部署数量
+  verticle-count: 6
+  # 允许NIO线程处理单个请求的最长时间, 毫秒
+  max-event-loop-execute-time: 300
+
+  handler-mappings:
+    # path为/demo的请求, 会依次经过homeHander, demoHandler
+    - path: /user
+      method: GET
+      # spring bean名
+      beanNames: userHandler
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/vertx?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&rewriteBatchedStatements=true&useSSL=false
+    username: root
+    password: "00000"
+
+mybatis:
+  mapper-locations: classpath:/mybatis/mapper/*.xml
+
